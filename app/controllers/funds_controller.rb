@@ -3,7 +3,7 @@ require "nokogiri"
 
 class FundsController < ApplicationController
   def scrape
-    Fund.destroy_all
+    funds = {}
     extensions = ["0P00000JGA.F", "0P0001DFPM.F", "0P00015OFP.F", "IEGB.F", "XUMB.F"]
     extensions.each do |extension|
       url = "https://finance.yahoo.com/quote/#{extension}"
@@ -19,13 +19,15 @@ class FundsController < ApplicationController
         element.attribute('data-field').value == "regularMarketPrice"
       end
       price = price_elements.last.text.strip
-      @fund = Fund.new(name: name, price: price)
-      @fund.save
+      funds[name] = price
+      # @fund = Fund.new(name: name, price: price)
+      # @fund.save
     end
+    funds
   end
 
   def index
     # scrape
-    @funds = Fund.all
+    @funds = scrape
   end
 end
