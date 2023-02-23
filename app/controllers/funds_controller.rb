@@ -25,7 +25,7 @@ class FundsController < ApplicationController
   end
 
   def index
-    scrape
+    # scrape
     @funds = Fund.all
   end
 end
