@@ -2,5 +2,6 @@
   "dependencies": {
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.3"
-  }
+  },
+  "packageManager": "yarn@1.22.19"
 }
